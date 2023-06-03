@@ -14,3 +14,9 @@ variable "sample2" {
 output "sample_op" {
     value = var.sample2
 }
+
+variable country{}
+
+output "country_opt"{
+    value = "The Name of the country is ${var.country}"
+}
