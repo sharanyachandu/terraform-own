@@ -1,4 +1,4 @@
-variable = "new" {
+variable "new" {
     default = "This is terraform concept"
 }
 
