@@ -1,16 +1,23 @@
-provider "aws"{
-    region = "us-east-1"
-}
+resource "aws_security_group" "allow_ssh_sg" {
+  name        = "b53_allow_ssh_sg"
+  description = "Allow SSH inbound traffic"
 
-resource "aws_instance""web"{
-    ami = "ami-0963555ef99f72d28"
-    instance_type = "t3.nano"
+  ingress {
+    description      = "SSH from VPC"
+    from_port        = 22
+    to_port          = 22
+    protocol         = "tcp"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
+  }
 
   tags = {
-    name = "terraform_servername"
-    }
-}
-
-output "private_dns_of_server"{
-    value = aws_instance.web.private_dns
+    Name = "b53_allow_ssh_sg"
+  }
 }
