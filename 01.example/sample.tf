@@ -1,22 +1,16 @@
-variable "new" {
-    default = "This is terraform concept"
+provider "aws"{
+    region = "us-east-1"
 }
 
-output  "new_op"{
-    value = var.new
+resource "aws_instance""web"{
+    ami = "ami-0963555ef99f72d28"
+    instance_type = "t3.nano"
+
+  tags = {
+    name = "terraform_servername"
+    }
 }
 
-
-variable "sample2" {
-    default = "hello terraform"
-}
-
-output "sample_op" {
-    value = var.sample2
-}
-
-variable country{}
-
-output "country_opt"{
-    value = "The Name of the country is ${var.country}"
+output "private_dns_of_server"{
+    value = aws_instance.web.private_dns
 }
